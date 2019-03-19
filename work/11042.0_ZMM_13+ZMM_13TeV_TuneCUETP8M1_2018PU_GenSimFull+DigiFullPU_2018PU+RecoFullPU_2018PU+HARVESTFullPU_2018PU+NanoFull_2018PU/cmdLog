@@ -1,0 +1,20 @@
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 11042.0_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU
+ cmsDriver.py ZMM_13TeV_TuneCUETP8M1_cfi  --conditions auto:phase1_2018_realistic -n 10 --era Run2_2018 --eventcontent FEVTDEBUG --relval 18000,100 -s GEN,SIM --datatier GEN-SIM --beamspot Realistic25ns13TeVEarly2018Collision --geometry DB:Extended --fileout file:step1.root  > step1_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 11042.0_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU
+ cmsDriver.py step2  --conditions auto:phase1_2018_realistic --pileup_input das:/RelValMinBias_13/CMSSW_10_3_0_pre5-103X_upgrade2018_realistic_v7-v1/GEN-SIM -n 10 --era Run2_2018 --eventcontent FEVTDEBUGHLT -s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:@relval2018 --datatier GEN-SIM-DIGI-RAW --pileup AVE_50_BX_25ns --geometry DB:Extended --filein  file:step1.root  --fileout file:step2.root  > step2_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 11042.0_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU
+ cmsDriver.py step3  --conditions auto:phase1_2018_realistic --pileup_input das:/RelValMinBias_13/CMSSW_10_3_0_pre5-103X_upgrade2018_realistic_v7-v1/GEN-SIM -n 10 --era Run2_2018 --eventcontent RECOSIM,MINIAODSIM,DQM --runUnscheduled  -s RAW2DIGI,L1Reco,RECO,RECOSIM,EI,PAT,VALIDATION:@standardValidation+@miniAODValidation,DQM:@standardDQM+@ExtraHLT+@miniAODDQM --datatier GEN-SIM-RECO,MINIAODSIM,DQMIO --pileup AVE_50_BX_25ns --geometry DB:Extended --filein  file:step2.root  --fileout file:step3.root  > step3_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 11042.0_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU
+ cmsDriver.py step4  --conditions auto:phase1_2018_realistic -s HARVESTING:@standardValidation+@standardDQM+@ExtraHLT+@miniAODValidation+@miniAODDQM --pileup_input das:/RelValMinBias_13/CMSSW_10_3_0_pre5-103X_upgrade2018_realistic_v7-v1/GEN-SIM -n 10 --era Run2_2018 --scenario pp --pileup AVE_50_BX_25ns --filetype DQM --geometry DB:Extended --mc  --filein file:step3_inDQM.root --fileout file:step4.root  > step4_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 11042.0_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU
+ cmsDriver.py step5  --conditions auto:phase1_2018_realistic -n 10 --era Run2_2018 --eventcontent NANOEDMAODSIM --filein file:step3_inMINIAODSIM.root -s NANO --datatier NANOAODSIM --geometry DB:Extended --fileout file:step5.root  > step5_ZMM_13+ZMM_13TeV_TuneCUETP8M1_2018PU_GenSimFull+DigiFullPU_2018PU+RecoFullPU_2018PU+HARVESTFullPU_2018PU+NanoFull_2018PU.log  2>&1
+ 

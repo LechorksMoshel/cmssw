@@ -1,0 +1,24 @@
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 10871.0_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018
+ cmsDriver.py QCDForPF_13TeV_TuneCUETP8M1_cfi  --conditions auto:phase1_2018_realistic -n 10 --era Run2_2018 --eventcontent FEVTDEBUG --relval 50000,100 -s GEN,SIM --datatier GEN-SIM --beamspot Realistic25ns13TeVEarly2018Collision --geometry DB:Extended --fileout file:step1.root  > step1_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 10871.0_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018
+ cmsDriver.py step2  --conditions auto:phase1_2018_realistic -s DIGI:pdigi_valid,L1,DIGI2RAW,HLT:@relval2018 --datatier GEN-SIM-DIGI-RAW -n 10 --geometry DB:Extended --era Run2_2018 --eventcontent FEVTDEBUGHLT --filein  file:step1.root  --fileout file:step2.root  > step2_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 10871.0_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018
+ cmsDriver.py step3  --conditions auto:phase1_2018_realistic -n 10 --era Run2_2018 --eventcontent RECOSIM,MINIAODSIM,DQM --runUnscheduled  -s RAW2DIGI,L1Reco,RECO,RECOSIM,EI,PAT,VALIDATION:@standardValidation+@miniAODValidation,DQM:@standardDQM+@ExtraHLT+@miniAODDQM --datatier GEN-SIM-RECO,MINIAODSIM,DQMIO --geometry DB:Extended --filein  file:step2.root  --fileout file:step3.root  > step3_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 10871.0_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018
+ cmsDriver.py step4  --conditions auto:phase1_2018_realistic -s HARVESTING:@standardValidation+@standardDQM+@ExtraHLT+@miniAODValidation+@miniAODDQM --scenario pp --filetype DQM --geometry DB:Extended --era Run2_2018 --mc  -n 100  --filein file:step3_inDQM.root --fileout file:step4.root  > step4_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 10871.0_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018
+ cmsDriver.py step5  --conditions auto:phase1_2018_realistic -n 10 --era Run2_2018 --eventcontent ALCARECO --filein file:step3.root -s ALCA:TkAlMuonIsolated+TkAlMinBias+MuAlOverlaps+EcalESAlign+TkAlZMuMu+HcalCalHBHEMuonFilter+TkAlUpsilonMuMu+TkAlJpsiMuMu+SiStripCalMinBias --datatier ALCARECO --geometry DB:Extended --fileout file:step5.root  > step5_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018.log  2>&1
+ 
+
+# in: /uscms_data/d3/syuan/workzone/CMSSW_10_4_0/src/work going to execute cd 10871.0_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018
+ cmsDriver.py step6  --conditions auto:phase1_2018_realistic -n 10 --era Run2_2018 --eventcontent NANOEDMAODSIM --filein file:step3_inMINIAODSIM.root -s NANO --datatier NANOAODSIM --geometry DB:Extended --fileout file:step6.root  > step6_QCD_FlatPt_15_3000HS_13+QCDForPF_13TeV_TuneCUETP8M1_2018_GenSimFull+DigiFull_2018+RecoFull_2018+HARVESTFull_2018+ALCAFull_2018+NanoFull_2018.log  2>&1
+ 
