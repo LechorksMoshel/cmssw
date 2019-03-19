@@ -36,7 +36,7 @@ phase2_timing.toModify(packedPFCandidates, storeTiming = cms.bool(True))
 
 from Configuration.Eras.Modifier_run2_HCAL_2018_cff import run2_HCAL_2018
 run2_HCAL_2018.toModify(packedPFCandidates,
-    pfCandidateTypesForHcalDepth = cms.vint32(130,11,22),  # PF candidate types for adding Hcal depth energy fraction information (130: neutral hadron, 11: PF electron, 22: PF photon)
+				pfCandidateTypesForHcalDepth = cms.vint32(130,11,22,211),  # PF candidate types for adding Hcal depth energy fraction information (130: neutral hadron, 11: PF electron, 22: PF photon, 211: charged hadrons)
     storeHcalDepthEndcapOnly = cms.bool(True)
 )
 
