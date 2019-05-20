@@ -57,6 +57,7 @@ PuppiProducer::PuppiProducer(const edm::ParameterSet& iConfig) {
     produces<std::vector<double>> ("PuppiAlphasMed");
     produces<std::vector<double>> ("PuppiAlphasRms");
   }
+  produces<edm::ValueMap<float>>("PuppiDepth");
 }
 // ------------------------------------------------------------------------------------------
 PuppiProducer::~PuppiProducer(){
@@ -80,8 +81,13 @@ void PuppiProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
       if (!vtxIter->isFake() && vtxIter->ndof()>=fVtxNdofCut && std::abs(vtxIter->z())<=fVtxZCut)
          npv++;
    }
+   // This is a dummy to access the "translate" method which i
+   // non-static member function even though it doesn't need t
+   // Will fix in the future. 
+   static const reco::PFCandidate dummySinceTranslateIsNotStat
 
   //Fill the reco objects
+  std::vector<double> lDepths;
   fRecoObjCollection.clear();
   fRecoObjCollection.reserve(pfCol->size());
   for(auto const& aPF : *pfCol) {
@@ -92,6 +98,7 @@ void PuppiProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
     pReco.m   = aPF.mass();
     pReco.rapidity = aPF.rapidity();
     pReco.charge = aPF.charge(); 
+    pReco.pfType    = dummySinceTranslateIsNotStatic.translatePdgIdToType(aPF.pdgId());
     const reco::Vertex *closestVtx = nullptr;
     double pDZ    = -9999; 
     double pD0    = -9999; 
@@ -101,6 +108,8 @@ void PuppiProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
     if(lPack == nullptr ) {
 
       const reco::PFCandidate *pPF = dynamic_cast<const reco::PFCandidate*>(&aPF);
+      pReco.depth     = computeDepth(pPF);
+      lDepths.push_back(pReco.depth);
       double curdz = 9999;
       int closestVtxForUnassociateds = -9999;
       const reco::TrackRef aTrackRef = pPF->trackRef();
@@ -160,7 +169,8 @@ void PuppiProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
       pD0        = lPack->dxy();
       pReco.dZ      = pDZ;
       pReco.d0      = pD0;
-  
+      pReco.depth     = computeDepth(lPack);
+      lDepths.push_back(pReco.depth);
       pReco.id = 0; 
       if (std::abs(pReco.charge) == 0){ pReco.id = 0; }
       if (std::abs(pReco.charge) > 0){
@@ -324,9 +334,20 @@ void PuppiProducer::produce(edm::Event& iEvent, const edm::EventSetup& iSetup) {
     iEvent.put(std::move(theAlphasMed),"PuppiAlphasMed");
     iEvent.put(std::move(theAlphasRms),"PuppiAlphasRms");
   }
-  
+  std::unique_ptr<edm::ValueMap<float> > lDepthOut(new edm::ValueMap<float>());
+  edm::ValueMap<float>::Filler  lDepthFiller(*lDepthOut);
+  lDepthFiller.insert(hPFProduct,lDepths.begin(),lDepths.end());
+  lDepthFiller.fill();
+  iEvent.put(std::move(lDepthOut),"PuppiDepth");
 }
-
+// ----------------------------------------------------------
+double PuppiProducer::computeDepth(auto *aPF) { 
+  float lDepth[7];
+  if(aPF->pdgId() != 130 or aPF->() != 130) return 1;
+  for(unsigned int i0 = 0; i0 < 7; i0++) lDepth[i0] = aPF->hcalDepthEnergyFraction(i0+1);
+  //Ratio method for now
+  return lDepth[1]/(lDepth[0]+lDepth[1]);
+}
 // ------------------------------------------------------------------------------------------
 void PuppiProducer::beginJob() {
 }

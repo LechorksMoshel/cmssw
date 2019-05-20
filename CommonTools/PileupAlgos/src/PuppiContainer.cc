@@ -209,6 +209,17 @@ double PuppiContainer::getChi2FromdZ(double iDZ) {
     lChi2PU*=lChi2PU;
     return lChi2PU;
 }
+double PuppiContainer::getChi2FromDepth(double iDepth) {
+    //We need to obtain prob of PU + (1-Prob of LV)
+    //At the moment we assume this is translated to a probabi
+    double lProbLV = iDepth;
+    double lProbPU = 1-lProbLV;
+    if(lProbPU <= 0) lProbPU = 1e-16;   //Quick Trick to thro
+    if(lProbPU >= 0) lProbPU = 1-1e-16; //Ditto
+    double lChi2PU = TMath::ChisquareQuantile(lProbPU,1);
+    lChi2PU*=lChi2PU;
+    return lChi2PU;
+}
 std::vector<double> const & PuppiContainer::puppiWeights() {
     int lNParticles    = fRecoParticles->size();
 
@@ -250,9 +261,12 @@ std::vector<double> const & PuppiContainer::puppiWeights() {
         double pChi2   = 0;
         if(fUseExp){
             //Compute an Experimental Puppi Weight with delta Z info (very simple example)
-            pChi2 = getChi2FromdZ(rParticle.dZ);
+            //pChi2 = getChi2FromdZ(rParticle.dZ);
             //Now make sure Neutrals are not set
-            if(rParticle.pfType > 3) pChi2 = 0;
+            //if(rParticle.pfType > 3) pChi2 = 0;
+	    pChi2 = getChi2FromDepth(rParticle.depth);
+	    //Apply this only to neutral hadrons - now we can add the charged hadrons?
+            if(rParticle.pfType != 5) pChi2 = 0;
         }
         //Fill and compute the PuppiWeight
         int lNAlgos = fPuppiAlgo[pPupId].numAlgos();

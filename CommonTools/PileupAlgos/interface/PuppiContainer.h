@@ -30,6 +30,7 @@ protected:
     void    getRMSAvg    (int iOpt,std::vector<PuppiCandidate> const &iConstits,std::vector<PuppiCandidate> const &iParticles,std::vector<PuppiCandidate> const &iChargeParticles);
     void    getRawAlphas    (int iOpt,std::vector<PuppiCandidate> const &iConstits,std::vector<PuppiCandidate> const &iParticles,std::vector<PuppiCandidate> const &iChargeParticles);
     double  getChi2FromdZ(double iDZ);
+    double  getChi2FromDepth(double iDepth);
     int     getPuppiId   ( float iPt, float iEta);
     double  var_within_R (int iId, const std::vector<PuppiCandidate> & particles, const PuppiCandidate& centre, const double R);
     

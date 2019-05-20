@@ -38,6 +38,7 @@ public:
 private:
 	virtual void beginJob() ;
 	void produce(edm::Event&, const edm::EventSetup&) override;
+	double computeDepth(auto *aPF);
 	virtual void endJob() ;
       
 	edm::EDGetTokenT< CandidateView > tokenPFCandidates_;
