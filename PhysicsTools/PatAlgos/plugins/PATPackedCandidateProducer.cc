@@ -90,6 +90,8 @@ namespace pat {
             const double minPtForTrackProperties_;
             const int covarianceVersion_;
             const std::vector<int> covariancePackingSchemas_;
+            const std::vector<int> pfCandidateTypesForHcalDepth_;
+            const bool storeHcalDepthEndcapOnly_;
       
             const bool storeTiming_;
       
@@ -123,7 +125,9 @@ pat::PATPackedCandidateProducer::PATPackedCandidateProducer(const edm::Parameter
   minPtForTrackProperties_(iConfig.getParameter<double>("minPtForTrackProperties")),
   covarianceVersion_(iConfig.getParameter<int >("covarianceVersion")),
   covariancePackingSchemas_(iConfig.getParameter<std::vector<int> >("covariancePackingSchemas")),
-  storeTiming_(iConfig.getParameter<bool>("storeTiming"))  
+  pfCandidateTypesForHcalDepth_(iConfig.getParameter<std::vector<int> >("pfCandidateTypesForHcalDepth")),
+  storeHcalDepthEndcapOnly_(iConfig.getParameter<bool>("storeHcalDepthEndcapOnly")),
+  storeTiming_(iConfig.getParameter<bool>("storeTiming"))
 {
   std::vector<edm::InputTag> sv_tags = iConfig.getParameter<std::vector<edm::InputTag> >("secondaryVerticesForWhiteList");
   for(auto itag : sv_tags){
@@ -319,6 +323,17 @@ void pat::PATPackedCandidateProducer::produce(edm::StreamID, edm::Event& iEvent,
           outPtrP->back().setHcalFraction(cand.rawHcalEnergy()/(cand.rawEcalEnergy()+cand.rawHcalEnergy()));
 	} else {
 	  outPtrP->back().setHcalFraction(0);
+	}
+
+	// storing HcalDepthEnergyFraction information
+	if ( std::find(pfCandidateTypesForHcalDepth_.begin(), pfCandidateTypesForHcalDepth_.end(), abs(cand.pdgId())) != pfCandidateTypesForHcalDepth_.end() ){
+	  if (!storeHcalDepthEndcapOnly_ || fabs(outPtrP->back().eta())>1.3 ){  // storeHcalDepthEndcapOnly_==false -> store all eta of selected PF types, if true, only |eta|>1.3 of selected PF types will be stored  
+	    std::array<float,7> hcalDepthEnergyFractions {{
+		cand.hcalDepthEnergyFraction(1), cand.hcalDepthEnergyFraction(2), cand.hcalDepthEnergyFraction(3), cand.hcalDepthEnergyFraction(4),
+		  cand.hcalDepthEnergyFraction(5), cand.hcalDepthEnergyFraction(6), cand.hcalDepthEnergyFraction(7)
+		  }};
+	    outPtrP->back().setHcalDepthEnergyFractions(hcalDepthEnergyFractions);
+	  }
 	}
 	
 	//specifically this is the PFLinker requirements to apply the e/gamma regression
