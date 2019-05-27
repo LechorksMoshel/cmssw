@@ -351,13 +351,24 @@ double PuppiProducer::computeDepth(auto *aPF) {
   fPionDisc->fDepth5 = lDepth[4];
   fPionDisc->fDepth6 = lDepth[5];
   fPionDisc->fDepth7 = lDepth[6];
-  fPionDisc->fEcal   = (1.-aPF->hcalFraction());
+  const pat::PackedCandidate *lPack = dynamic_cast<const pat::PackedCandidate* >(aPF);
+  const reco::PFCandidate *lPF = dynamic_cast<const reco::PFCandidate* >(aPF);
+  std::cout<<(lPack==nullptr)<<(lPF==nullptr)<<std::endl;
+  if (lPF != nullptr) {//in case of reco::PFCandidate
+    fPionDisc->fEcal   = lPF->ecalEnergy()/(lPF->ecalEnergy()+lPF->hcalEnergy()); 
+	std::cout<<"PFCandidate energy="<< lPF->ecalEnergy()<<"+"<<lPF->hcalEnergy()<<std::endl;
+  }
+  else if (lPack != nullptr)  {//in case of pat::PackedCandidate
+    fPionDisc->fEcal   = 1.-lPack->hcalFraction(); 
+	std::cout<<"PackedCandidate hcalFraction="<< lPack->hcalFraction() <<std::endl; 
+  }
+  else std::cout<<"Error: Invalid class type: "<<typeid(aPF).name()<<std::endl;
   fPionDisc->fEta    = aPF->eta();
   fPionDisc->fPhi    = aPF->phi();
   fPionDisc->SetNNVectorVar();
   double d = fPionDisc->EvaluateNN();
   double pval = d/(1.+d);
-  std::cout<<"r21="<<fPionDisc->fDepth2/fPionDisc->fDepth1<<" ecal frac="<<fPionDisc->fEcal<<" d="<<d<<" pval="pval<<std::endl;
+  std::cout<<"r21="<<fPionDisc->fDepth2/fPionDisc->fDepth1<<" ecal frac="<<fPionDisc->fEcal<<" d="<<d<<" pval="<<pval<<std::endl;
   return pval;
 }
 // ------------------------------------------------------------------------------------------
