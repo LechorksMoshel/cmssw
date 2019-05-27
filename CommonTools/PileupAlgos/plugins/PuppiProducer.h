@@ -17,6 +17,7 @@
 #include "DataFormats/ParticleFlowCandidate/interface/PFCandidate.h"
 #include "DataFormats/PatCandidates/interface/PackedCandidate.h"
 #include "CommonTools/PileupAlgos/interface/PuppiContainer.h"
+#include "CommonTools/PileupAlgos/interface/DepthNNId.h"  
 
 // ------------------------------------------------------------------------------------------
 class PuppiProducer : public edm::stream::EDProducer<> {
@@ -60,5 +61,6 @@ private:
 	std::vector<RecoObj> fRecoObjCollection;
         std::unique_ptr< PFOutputCollection >          fPuppiCandidates;
 	std::unique_ptr< PackedOutputCollection >      fPackedPuppiCandidates;
+	DepthNNId* fPionDisc;
 };
 #endif
