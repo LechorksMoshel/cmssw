@@ -215,7 +215,7 @@ double PuppiContainer::getChi2FromDepth(double iDepth) {
     double lProbLV = iDepth;
     double lProbPU = 1-lProbLV;
     if(lProbPU <= 0) lProbPU = 1e-16;   //Quick Trick to thro
-    if(lProbPU >= 0) lProbPU = 1-1e-16; //Ditto
+    if(lProbPU >= 1) lProbPU = 1-1e-16; //Ditto
     double lChi2PU = TMath::ChisquareQuantile(lProbPU,1);
     lChi2PU*=lChi2PU;
     return lChi2PU;
