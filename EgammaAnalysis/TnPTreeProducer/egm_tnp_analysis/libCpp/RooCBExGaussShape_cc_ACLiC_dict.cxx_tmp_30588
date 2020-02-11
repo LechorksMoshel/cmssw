@@ -1,0 +1,147 @@
+// Do NOT change. Changes will be lost next time file is generated
+
+#define R__DICTIONARY_FILENAME dIuscms_datadId3dIsyuandIworkzonedIworkdI1106EleTrigEffdIsrcdIEgammaAnalysisdITnPTreeProducerdIegm_tnp_analysisdIdOdIdOdIlibCppdIRooCBExGaussShape_cc_ACLiC_dict
+
+/*******************************************************************/
+#include <stddef.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <assert.h>
+#define G__DICTIONARY
+#include "RConfig.h"
+#include "TClass.h"
+#include "TDictAttributeMap.h"
+#include "TInterpreter.h"
+#include "TROOT.h"
+#include "TBuffer.h"
+#include "TMemberInspector.h"
+#include "TInterpreter.h"
+#include "TVirtualMutex.h"
+#include "TError.h"
+
+#ifndef G__ROOT
+#define G__ROOT
+#endif
+
+#include "RtypesImp.h"
+#include "TIsAProxy.h"
+#include "TFileMergeInfo.h"
+#include <algorithm>
+#include "TCollectionProxyInfo.h"
+/*******************************************************************/
+
+#include "TDataMember.h"
+
+// Since CINT ignores the std namespace, we need to do so in this file.
+namespace std {} using namespace std;
+
+// Header files passed as explicit arguments
+#include "/uscms_data/d3/syuan/workzone/work/1106EleTrigEff/src/EgammaAnalysis/TnPTreeProducer/egm_tnp_analysis/././libCpp/RooCBExGaussShape.cc"
+
+// Header files passed via #pragma extra_include
+
+   namespace ROOT {
+      inline ::ROOT::TGenericClassInfo *GenerateInitInstance();
+      static TClass *ROOT_Dictionary();
+
+      // Function generating the singleton type initializer
+      inline ::ROOT::TGenericClassInfo *GenerateInitInstance()
+      {
+         static ::ROOT::TGenericClassInfo 
+            instance("ROOT", 0 /*version*/, "Rtypes.h", 102,
+                     ::ROOT::Internal::DefineBehavior((void*)0,(void*)0),
+                     &ROOT_Dictionary, 0);
+         return &instance;
+      }
+      // Insure that the inline function is _not_ optimized away by the compiler
+      ::ROOT::TGenericClassInfo *(*_R__UNIQUE_DICT_(InitFunctionKeeper))() = &GenerateInitInstance;  
+      // Static variable to force the class initialization
+      static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstance(); R__UseDummy(_R__UNIQUE_DICT_(Init));
+
+      // Dictionary for non-ClassDef classes
+      static TClass *ROOT_Dictionary() {
+         return GenerateInitInstance()->GetClass();
+      }
+
+   }
+
+namespace ROOT {
+   static void *new_RooCBExGaussShape(void *p = 0);
+   static void *newArray_RooCBExGaussShape(Long_t size, void *p);
+   static void delete_RooCBExGaussShape(void *p);
+   static void deleteArray_RooCBExGaussShape(void *p);
+   static void destruct_RooCBExGaussShape(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::RooCBExGaussShape*)
+   {
+      ::RooCBExGaussShape *ptr = 0;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::RooCBExGaussShape >(0);
+      static ::ROOT::TGenericClassInfo 
+         instance("RooCBExGaussShape", ::RooCBExGaussShape::Class_Version(), "libCpp/RooCBExGaussShape.h", 15,
+                  typeid(::RooCBExGaussShape), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::RooCBExGaussShape::Dictionary, isa_proxy, 4,
+                  sizeof(::RooCBExGaussShape) );
+      instance.SetNew(&new_RooCBExGaussShape);
+      instance.SetNewArray(&newArray_RooCBExGaussShape);
+      instance.SetDelete(&delete_RooCBExGaussShape);
+      instance.SetDeleteArray(&deleteArray_RooCBExGaussShape);
+      instance.SetDestructor(&destruct_RooCBExGaussShape);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::RooCBExGaussShape*)
+   {
+      return GenerateInitInstanceLocal((::RooCBExGaussShape*)0);
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal((const ::RooCBExGaussShape*)0x0); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+//______________________________________________________________________________
+atomic_TClass_ptr RooCBExGaussShape::fgIsA(0);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *RooCBExGaussShape::Class_Name()
+{
+   return "RooCBExGaussShape";
+}
+
+//______________________________________________________________________________
+const char *RooCBExGaussShape::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::RooCBExGaussShape*)0x0)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int RooCBExGaussShape::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::RooCBExGaussShape*)0x0)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *RooCBExGaussShape::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::RooCBExGaussShape*)0x0)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *RooCBExGaussShape::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::RooCBExGaussShape*)0x0)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+void RooCBExGaussShape::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class RooCBExGaussShape.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(RooCBExGaussShape::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(RooCBExGaussShape::Class(),this);
+   }
+}
+

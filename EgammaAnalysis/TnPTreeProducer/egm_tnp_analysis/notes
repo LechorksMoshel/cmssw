@@ -1,0 +1,11 @@
+python tnpEGM_fitter.py etc/config/settings_hlt.py --flag passingHLT --createBins
+python tnpEGM_fitter.py etc/config/settings_hlt.py --flag passingHLT --checkBins
+python tnpEGM_fitter.py etc/config/settings_hlt.py --flag passingHLT --createHists
+python tnpEGM_fitter.py etc/config/settings_hlt.py --flag passingHLT --doFit
+python tnpEGM_fitter.py etc/config/settings_hlt.py --flag passingHLT --doFit --mcSig --altSig
+python tnpEGM_fitter.py etc/config/settings_hlt.py --flag passingHLT --doFit --altSig
+python tnpEGM_fitter.py etc/config/settings_hlt.py --flag passingHLT --doFit --altBkg
+python tnpEGM_fitter.py etc/config/settings_hlt.py --flag passingHLT --sumUp
+
+uploadwww results/Data2017/tnpEleHLT/passingHLT/plots/mc/nominalFit/ EleTrigEff
+
